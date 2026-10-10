@@ -1,0 +1,26 @@
+title: Successful Login to SSH/Telnet Honeypot
+id: a1f3c7e2-1b4d-4e9a-8c21-0f5b9d2e7a10
+status: experimental
+description: >
+  Detects a successful authentication against the Cowrie honeypot. On a real
+  asset this indicates a compromised credential / successful brute force.
+author: Karim Elmokhraty
+date: 2026/10/10
+references:
+  - https://attack.mitre.org/techniques/T1110/
+logsource:
+  product: cowrie
+detection:
+  selection:
+    eventid: 'cowrie.login.success'
+  condition: selection
+fields:
+  - src_ip
+  - username
+  - password
+falsepositives:
+  - Analyst testing the honeypot
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110

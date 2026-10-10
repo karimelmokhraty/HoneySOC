@@ -1,0 +1,15 @@
+# HoneySOC — fail2ban configuration
+# Protects the REAL admin SSH port (22222) with automated banning.
+# The honeypot ports (22/23) are deliberately left unprotected — they
+# must stay open so attackers can be observed. Protect the asset,
+# observe the trap.
+
+[DEFAULT]
+bantime  = 1h      # ban an offender for 1 hour
+findtime = 10m     # ...if they fail within a 10-minute window
+maxretry = 4       # ...4 times
+
+[sshd]
+enabled  = true
+port     = 22222
+backend  = systemd

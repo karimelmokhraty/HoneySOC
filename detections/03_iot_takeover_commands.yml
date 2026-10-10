@@ -1,0 +1,30 @@
+title: Mirai/IoT Telnet Takeover Command Sequence
+id: c3f5e9a4-3d6f-4a1c-ae43-2b7d1f4a9c32
+status: experimental
+description: >
+  Detects the canonical Mirai Telnet takeover sequence and HiSilicon camera
+  fingerprinting executed after access to an IoT-style device.
+author: Karim Elmokhraty
+date: 2026/10/10
+references:
+  - https://attack.mitre.org/techniques/T1059/
+logsource:
+  product: cowrie
+detection:
+  selection:
+    eventid: 'cowrie.command.input'
+    input|contains:
+      - '/bin/busybox'
+      - 'enable'
+      - 'linuxshell'
+  condition: selection
+fields:
+  - src_ip
+  - input
+falsepositives:
+  - Legitimate busybox use (unlikely on a honeypot)
+level: medium
+tags:
+  - attack.execution
+  - attack.t1059
+  - attack.t1059.004

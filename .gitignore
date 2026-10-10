@@ -1,0 +1,26 @@
+# Secrets — NEVER commit
+.env
+*.env
+*_token*
+*secret*
+
+# SSH keys
+id_ed25519
+id_rsa
+*.pem
+*.key
+honeysoc_sync*
+
+# Raw honeypot logs (large; may contain attacker payloads)
+logs/
+*.json
+sync.log
+
+# Captured malware — never commit
+downloads/
+*.bin
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp

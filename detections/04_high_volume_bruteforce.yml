@@ -1,0 +1,25 @@
+title: High-Volume Brute-Force Source
+id: d4a6f0b5-4e70-4b2d-bf54-3c8e2a5b0d43
+status: experimental
+description: >
+  Flags a single source IP generating an abnormal number of failed logins in a
+  short window - an aggressive automated brute-force bot worth blocking.
+author: Karim Elmokhraty
+date: 2026/10/10
+references:
+  - https://attack.mitre.org/techniques/T1110/
+logsource:
+  product: cowrie
+detection:
+  selection:
+    eventid: 'cowrie.login.failed'
+  timeframe: 10m
+  condition: selection | count() by src_ip > 50
+fields:
+  - src_ip
+falsepositives:
+  - Shared NAT gateways with many legitimate users (not applicable to a honeypot)
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110
